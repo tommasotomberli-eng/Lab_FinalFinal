@@ -13,7 +13,71 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QProgressBar" name="loadingBar">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>190</y>
+      <width>611</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QProgressBar {
+    border: 1px solid #bbbbbb;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+QProgressBar::chunk {
+    border-radius: 10px;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #00c6ff, stop:1 #0072ff);
+}</string>
+    </property>
+    <property name="value">
+     <number>24</number>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>310</y>
+      <width>191</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    color: white;
+    font-weight: bold;
+    border: 1px solid #bbbbbb;
+    border-radius: 10px;
+    padding: 6px 12px;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #00c6ff, stop:1 #0072ff);
+}
+
+QPushButton:hover {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #33d1ff, stop:1 #338aff);
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #0072ff, stop:1 #00c6ff);
+}
+
+QPushButton:disabled {
+    background-color: #e0e0e0;
+    color: #a0a0a0;
+    border: 1px solid #cccccc;
+}</string>
+    </property>
+    <property name="text">
+     <string>Click to load</string>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>

@@ -2,12 +2,12 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QThread>
+#include <QProgressBar>
+#include <QPushButton>
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
-QT_END_NAMESPACE
+#include "resourceloader.h"
+#include "progressobserver.h"
 
 class MainWindow : public QMainWindow
 {
@@ -17,7 +17,17 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void startProcess(); //click bottone
+
 private:
-    Ui::MainWindow *ui;
+    //UI
+    QProgressBar *progressBar;
+    QPushButton *btnLoad;
+    //Logica
+    QThread *workerThread;
+    ResourceLoader *subjectLoader;
+    ProgressObserver *observer;
 };
+
 #endif // MAINWINDOW_H

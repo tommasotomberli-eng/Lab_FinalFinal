@@ -23,6 +23,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Laboratorio_Programmazione_QT
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        resourceloader.cpp
+        resourceloader.h
+        progressobserver.cpp
+        progressobserver.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Laboratorio_Programmazione_QT APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
