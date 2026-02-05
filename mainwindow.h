@@ -3,11 +3,12 @@
 
 #include <QMainWindow>
 #include <QThread>
-#include <QProgressBar>
-#include <QPushButton>
-
 #include "resourceloader.h"
 #include "progressobserver.h"
+
+QT_BEGIN_NAMESPACE
+namespace Ui { class MainWindow; }
+QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
@@ -18,13 +19,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void startProcess(); //click bottone
+    void startProcess();
 
 private:
     //UI
-    QProgressBar *progressBar;
-    QPushButton *btnLoad;
-    //Logica
+    Ui::MainWindow *ui;
+    //logica
     QThread *workerThread;
     ResourceLoader *subjectLoader;
     ProgressObserver *observer;

@@ -8,7 +8,7 @@ class ProgressObserver : public QObject
 {
     Q_OBJECT
 public:
-    //scelta barra
+    //explicit + chiaro, *parent=nullptr genitore opzionale
     explicit ProgressObserver(QProgressBar *bar, QObject *parent = nullptr);
 
 public slots:
