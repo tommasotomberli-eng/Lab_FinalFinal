@@ -18,4 +18,4 @@ signals:
     void loadingFinished();
 };
 
-#endif // RESOURCELOADER_H
+#endif

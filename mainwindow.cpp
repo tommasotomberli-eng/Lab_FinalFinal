@@ -2,23 +2,22 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent) , ui(new Ui::MainWindow)  //crea figlio QmainW con ui
+    : QMainWindow(parent) , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     ui->loadingBar->setValue(0);
-    subjectLoader = new ResourceLoader();   //soggetto
-    observer = new ProgressObserver(ui->loadingBar, this);  //observer
-    workerThread = new QThread(this);   //tgreding
+    subjectLoader = new ResourceLoader();
+    observer = new ProgressObserver(ui->loadingBar, this);
+    workerThread = new QThread(this);
     subjectLoader->moveToThread(workerThread);
 
-    connect(ui->btnStart, &QPushButton::clicked, this, &MainWindow::startProcess); //clicco = chiamo startProcess
+    connect(ui->btnStart, &QPushButton::clicked, this, &MainWindow::startProcess);
     connect(workerThread, &QThread::started, subjectLoader, &ResourceLoader::simulateLoading);
-    connect(subjectLoader, &ResourceLoader::progressChanged,    //notifica = agg barra
+    connect(subjectLoader, &ResourceLoader::progressChanged,
             observer, &ProgressObserver::updateValue);
 
-    connect(subjectLoader, &ResourceLoader::loadingFinished, workerThread, &QThread::quit); //pulizia
+    connect(subjectLoader, &ResourceLoader::loadingFinished, workerThread, &QThread::quit);
 
-    //restart cliccando
     connect(subjectLoader, &ResourceLoader::loadingFinished, this, [this](){
         ui->btnStart->setEnabled(true);
         ui->btnStart->setText("Fatto! Riavvia");

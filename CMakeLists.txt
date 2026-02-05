@@ -10,7 +10,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Test)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -68,6 +68,33 @@ install(TARGETS Laboratorio_Programmazione_QT
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
+#fetch googletest
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/refs/heads/main.zip
+)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+enable_testing()
+#escludo GUI solo logica
+add_executable(UnitTests
+    test_main.cpp
+    resourceloader.cpp
+    resourceloader.h
+    progressobserver.cpp
+    progressobserver.h
+)
+#collego
+target_link_libraries(UnitTests
+    PRIVATE
+    Qt${QT_VERSION_MAJOR}::Widgets
+    Qt${QT_VERSION_MAJOR}::Test
+    GTest::gtest_main
+)
+#reg test
+include(GoogleTest)
+add_test(NAME AllTests COMMAND UnitTests)
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(Laboratorio_Programmazione_QT)
